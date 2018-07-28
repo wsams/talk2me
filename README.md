@@ -121,11 +121,11 @@ Persistent chat rooms are not enabled by default and are never required when ent
 
 ## Encrypted messages
 
-Encryption is handled by the asmCrypto JavaScript library and happens entirely within your browser.
+Encryption is handled by the Stanford Javascript Crypto Library and happens entirely within your browser.
 
 To encrypt your messages, check **Enable client-side encryption** before entering a chat room. Users with a lock symbol to the left of their usernames indicate that they are encrypting their messages. Both encrypting users and non-encrypting users may chat in the same room, however, non-encrypting users cannot see the messages of users encrypting their messages. Vice versa does not hold. Users that are encrypting their messages may still see non-encrypting user's messages. If you are encrypting your messages, those messages that are encrypted will have a lock symbol to the left of the message.
 
-Your encryption key must be between 16 and 32 characters long - no other requirements.
+Your encryption password must be greater than 7 characters - no other requirements.
 
 ## Chat Usage
 
