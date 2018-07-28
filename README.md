@@ -7,7 +7,7 @@ This chat application is designed for for use within a web browser and is focuse
 * Secure WebSockets over hitch for secure instant chat.
 * Rooms with multiple users.
     * Persistent chat room messages stored in MySQL if enabled.
-* Client-side[1] encryption with [https://github.com/vibornoff/asmcrypto.js](asmCrypto).
+* Client-side[1] encryption with [http://bitwiseshiftleft.github.io/sjcl/](Stanford Javascript Crypto Library).
 * Current status. e.g. Free, Away, Busy, Idle, ...
 * Slash commands similar to IRC. Implement `CommandPlugin` for custom slash commands. e.g. /help
 * User is typing notification.
@@ -215,6 +215,10 @@ You could even implement a whole slew of admin commands. e.g. `/admin <password>
 
 ## Notes
 
-[1] If you are going to use client-side encryption it is advised to also use SSL. See this article for security risks. <a target="_blank" href="http://matasano.com/articles/javascript-cryptography/">http://matasano.com/articles/javascript-cryptography/</a>.
-
 This application runs on these two official images from Docker Hub: `mysql:5.7` and `ubuntu:18.04`. The web application runs on the default `apache2` package from Ubuntu. See `docker/web-server/Dockerfile` and `docker/chat-server/Dockerfile` for configuration.
+
+The `messages` table `message` column content will be changed soon and will require a migration, however encrypted content cannot be migrated easily. Persistent chat should be used without the intent of long term storage until this work is complete. The migration won't be difficult but will require a bit of work.
+
+## Disclaimer
+
+The author of this software is not a security expert and does not provide any warranty or guarantee that this application is as secure as it can be. Use at your own risk. SSL should always be used. Websockets are encrypted by proxying through `hitch` and chat messages are encrypted in the browser using `jscl.js`. See http://bitwiseshiftleft.github.io/sjcl/ for more information.

@@ -16,7 +16,6 @@
     var conn = null;
     var messagesShown = 0;
     var persistentURLBit = "!";
-    var sharedKey = "talk2me chiquita #94011";
     var linker = new Autolinker({
         newWindow: true,
         stripPrefix: false,
@@ -28,18 +27,6 @@
     function random(min, max) {
         "use strict";
         return Math.round(Math.random() * (max - min) + min);
-    }
-
-    function padRight(str, len) {
-        if (undefined === str || str === null) {
-            return "";
-        } else {
-            var pad = "";
-            for (var i = 0; i < len; i++) {
-                pad += "p";
-            }
-            return str + pad.slice(str.toString().length);
-        }
     }
 
     Date.prototype.today = function () {
@@ -397,7 +384,7 @@
                 usekey = true;
                 secret = $("#secret").val();
                 var l = secret.length;
-                if (l < 16 || l > 32) {
+                if (l < 8) {
                     removeErrorMessages();
                     $("#login-form").prepend("<div id=\"error\"></div>");
                     $("#error").addClass("alert alert-warning fade in")
@@ -406,7 +393,6 @@
                             .after("Secret key for client-side encryption must be between 16 and 32 characters.");
                     return false;
                 }
-                secret = padRight(secret, 32);
             } else {
                 usekey = false;
                 secret = "";
@@ -683,9 +669,7 @@
     function encryptMessage(msg) {
         "use strict";
         try {
-            return asmCrypto.bytes_to_base64(asmCrypto.AES_CBC
-                    .encrypt(asmCrypto.string_to_bytes(msg), asmCrypto
-                        .PBKDF2_HMAC_SHA256.bytes(secret, sharedKey, 4096, 16)));
+            return sjcl.encrypt(secret, msg);
         } catch (ex) {
             console.log("Could not encrypt message.");
             return false;
@@ -695,9 +679,7 @@
     function decryptMessage(msg) {
         "use strict";
         try {
-            return asmCrypto.bytes_to_string(asmCrypto.AES_CBC
-                    .decrypt(asmCrypto.base64_to_bytes(msg), asmCrypto
-                        .PBKDF2_HMAC_SHA256.bytes(secret, sharedKey, 4096, 16)));
+            return sjcl.decrypt(secret, msg);
         } catch (ex) {
             console.log("Could not decrypt message.");
             return false;
@@ -787,7 +769,7 @@
 
         $("#secret").on("keyup", function() {
             var l = $("#secret").val().length;
-            if (l >= 16 && l <= 32) {
+            if (l >= 8) {
                 $("#key-length").css("color", "green");
                 $("#key-length").html("Valid key");
             } else {
