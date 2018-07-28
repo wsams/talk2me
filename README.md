@@ -76,7 +76,7 @@ docker build -t talk2me --rm=true .
 cd ../../
 ```
 
-Currently the `html` directory is bind mounted into the container at `/var/www/html`. The web server is running as user `www-data` so all of the files in this directory should match the same uid. You may need to create a `www-data` user on your host system with uid=33 and gid=33. Then change the permissions of this directory so that apache can read the files. For example: `chown -R www-data:www-data html`. Using a named volume should get around this issue. If you need to create the local `www-data` user on a linux system you can use a command like the following: `useradd -g 33 -u 33 -s /sbin/nologin www-data`
+Currently the `html` directory is bind mounted into the container at `/var/www/html`. The web server is running as user `www-data` so all of the files in this directory should match the same uid. You may need to create a `www-data` user on your host system with uid=33 and gid=33. Then change the permissions of this directory so that apache can read the files. For example: `chown -R www-data:www-data html`. Using a named volume should get around this issue. If you need to create the local `www-data` user on a linux system you can use a command like the following: `useradd -g 33 -u 33 -s /sbin/nologin www-data`. It may also be possible to go inside the container (`docker exec -it talk2mewww bash`) and change the permissions without creating a local user account. `chown -R www-data:www-data /var/www/html`. You may not be able to access the files on your local system without `root` so be aware.
 
 Start the web application container:
 
