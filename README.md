@@ -96,6 +96,23 @@ Start the chat server:
 docker-compose up -d chat
 ```
 
+You may want to use a `docker-compose.override.yml` file. One like the following will allow you to name your containers and connect them to a particular network.
+
+```
+version: "2"
+services:
+  www:
+    container_name: talk2mewww
+  mysql:
+    container_name: talk2memysql
+  chat:
+    container_name: talk2mechat
+networks:
+  default:
+    external:
+      name: my_network_name_goes_here
+```
+
 ## Persistent Chat Rooms
 
 Persistent chat rooms are not enabled by default and are never required when entering a room. If you click the checkbox on the login page to **Create or join a persistent room** all of your messages will be logged. If you do not check the box your messages will not be logged. You can tell if a user is logging there messages when an exclamation mark is appended to their username. e.g. `@foobar!`
