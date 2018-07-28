@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>talk2me</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <link rel="shortcut icon" href="favicon.ico" />
+        <link type="text/css" rel="stylesheet" href="js/bootstrap/3.0.0/css/bootstrap.min.css" />
+        <link type="text/css" rel="stylesheet" href="css/jquery.jgrowl.min.css" />
+        <link type="text/css" rel="stylesheet" href="css/talk2me.css" />
+        <link type="text/css" rel="stylesheet" href="js/highlight/styles/atelier-forest.light.css" />
+    </head>
+    <body>
+        <div class="container">
+            <header class="container header">
+                <h1><span style="color:#930000">t</span><span style="color:#aa1717">a</span><span style="color:#bf3131">l</span><span style="color:#d65151">k</span>2<span style="color:#009100">m</span><span style="color:#1ea817">e</span></h1>
+            </header>
+            <div class="container main-control">
+                <form id="login-form" role="form" class="form-block">
+                    <div class="form-group">
+                        <input type="text" id="room" name="room"
+                                class="form-control btn-tooltip"
+                                placeholder="Default room is: public"
+                                title="Room must be 1-16 of the following characters 0-9a-zA-Z-_." />
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="username" name="username"
+                                class="form-control btn-tooltip"
+                                placeholder="Choose name"
+                                title="Name must be 1-16 of the following characters 0-9a-zA-Z-_." />
+                    </div>
+                    <div class="form-group">
+                        <div class="persistent-wrapper">
+                            <input type="checkbox" id="persistent" name="persistent" class="btn-tooltip" value="yes"
+                                    title="All messages in this room are persistent." /> <label
+                                    for="persistent">Create or join a persistent room</label>
+                            <br />
+                        </div>
+                        <input type="checkbox" id="usekey" name="usekey" class="btn-tooltip" value="yes"
+                                title="Anyone with the secret key can read and send encrypted messages.
+                                You must use this form to enter the key - direct URL access
+                                disabled." /> <label for="usekey">Enable client-side encryption</label>
+                    </div>
+                    <div id="keyform" class="block-hidden">
+                        <div class="form-group">
+                            <input type="password" id="secret" name="secret"
+                                    class="form-control btn-tooltip"
+                                    placeholder="Secret key"
+                                    title="Enter any 16-32 character secret" maxlength="32" />
+                        </div>
+                        <div id="key-length"></div>
+                    </div>
+                    <div class="form-group">
+                        <button id="login-button" class="login-button btn btn-primary">Login</button>
+                    </div>
+                </form>
+            </div>
+            <div class="container messages"></div>
+        </div>
+
+        <script id="message-form" type="text/x-handlebars-template">
+            <div id="room-users-box">
+                <!--<span style="font-weight:bold; color:green">Online</span>-->
+                <span id="users-online"></span>
+            </div>
+            <!--<form role="form"><input name="message" id="message"
+                type="text" class="form-control"
+                placeholder="@{{username}}  #{{room}}" /></form>-->
+            <form role="form"><textarea rows="1" name="message" id="message"
+                class="form-control" placeholder="@{{username}}  #{{room}}"></textarea></form>
+            <div class="btn-group btn-status pull-left btn-tooltiop"><button
+                type="button" class="btn btn-default btn-sm dropdown-toggle"
+                title="Set your current status - automatically sets to Idle"
+                data-toggle="dropdown"><span id="current-status">Free</span>
+                <span class="caret"></span></button><ul class="dropdown-menu"
+                role="menu">
+                <li><a class="cursor chg-status">Free</a></li>
+                <li><a class="cursor chg-status">BRB</a></li>
+                <li><a class="cursor chg-status">Away</a></li>
+                <li><a class="cursor chg-status">Busy</a></li>
+                <li><a class="cursor chg-status">DND!</a></li>
+                </ul></div>
+            <button class="clear-messages btn btn-primary btn-sm btn-tooltip pull-left"
+                title="Clear all messages" id="clear-messages">
+                <span class="glyphicon glyphicon-refresh"></span></button>
+            <button class="send-message btn btn-success btn-sm btn-tooltip pull-left"
+                title="Send message" id="send-message">
+                <span class="glyphicon glyphicon-send"></span></button>
+            <button class="logout btn btn-danger btn-sm btn-tooltip pull-right"
+                id="logout" title="Logout of room">
+                <span class="glyphicon glyphicon-log-out"></span></button>
+            <!--<button type="button" class="btn btn-sm btn-info pull-right btn-help" data-toggle="popover"
+                title="Help" data-content="<strong>Persistent Chat Rooms</strong><br /><br /><p>All messages are logged when you enter a room with persistent chat selected.</p><br /><br /><strong>Encrypted Messages</strong><br /><br /><p>When encryption is selected all messages sent are encrypted. Messages are encrypted in the browser using JavaScript which is not as secure as one would hope. However when using https outside of a persistent chat room this app is very secure. No messages are ever stored. Using encryption and https may bring you extra peace of mind.</p>">Help</button>-->
+        </script>
+
+        <script id="connection-lost-msg" type="text/x-handlebars-template">
+            <span class="connection-lost"><strong style="color:red;">
+            Cannot connect to server - will automatically connect when server back online.</strong>
+            If this persists please contact your system administrator or refresh the page.</span>
+            <span class="timestamp">{{timestamp}}</span>
+        </script>
+
+        <br /><br /><br />
+
+        <script src="js/jquery/1.10.2/jquery-1.10.2.min.js"></script>
+        <script src="js/jquery.jgrowl.min.js"></script>
+        <script src="js/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+        <script src="js/handlebars.min.js"></script>
+        <script src="js/moment.min.js"></script>
+        <script src="js/asmcrypto.min.js"></script>
+        <script src="js/config.js"></script>
+        <script src="js/tinycon.min.js"></script>
+        <script src="js/livequery/jquery.livequery.min.js"></script>
+        <script src="js/highlight/highlight.pack.js"></script>
+        <script src="js/wwiki.min.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/talk2me.js"></script>
+    </body>
+</html>

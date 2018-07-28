@@ -1,0 +1,27 @@
+version: "2"
+services:
+  www:
+    image: talk2me
+    volumes:
+      - ./html:/var/www/html
+  mysql:
+    image: mysql:5.7
+    environment:
+      - MYSQL_ROOT_PASSWORD
+      - MYSQL_USER
+      - MYSQL_PASSWORD
+      - MYSQL_DATABASE
+    volumes:
+      - ./sql:/docker-entrypoint-initdb.d
+      - ./mysql_data:/var/lib/mysql
+  chat:
+    image: talk2mechat
+    ports:
+      - ${WEBSOCKET_PORT}:8443
+    volumes:
+      - ./bin:/talk2me/bin
+      - ./src:/talk2me/src
+      - ./cert.pem:/talk2me/cert.pem
+      - ./startup.sh:/talk2me/startup.sh
+      - ./hitch.conf:/talk2me/hitch.conf
+      - ./vendor:/talk2me/vendor

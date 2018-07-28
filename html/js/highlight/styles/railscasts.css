@@ -1,0 +1,182 @@
+/*
+
+Railscasts-like style (c) Visoft, Inc. (Damien White)
+
+*/
+
+.hljs {
+  display: block ! important;
+  padding: 0.5em ! important;
+  background: #232323 ! important;
+  color: #E6E1DC ! important;
+}
+
+.hljs-comment,
+.hljs-template_comment,
+.hljs-javadoc,
+.hljs-shebang {
+  color: #BC9458 ! important;
+  font-style: italic ! important;
+}
+
+.hljs-keyword,
+.ruby .hljs-function .hljs-keyword,
+.hljs-request,
+.hljs-status,
+.nginx .hljs-title,
+.method,
+.hljs-list .hljs-title {
+  color: #C26230 ! important;
+}
+
+.hljs-string,
+.hljs-number,
+.hljs-regexp,
+.hljs-tag .hljs-value,
+.hljs-cdata,
+.hljs-filter .hljs-argument,
+.hljs-attr_selector,
+.apache .hljs-cbracket,
+.hljs-date,
+.tex .hljs-command,
+.markdown .hljs-link_label {
+  color: #A5C261 ! important;
+}
+
+.hljs-subst {
+  color: #519F50 ! important;
+}
+
+.hljs-tag,
+.hljs-tag .hljs-keyword,
+.hljs-tag .hljs-title,
+.hljs-doctype,
+.hljs-sub .hljs-identifier,
+.hljs-pi,
+.input_number {
+  color: #E8BF6A ! important;
+}
+
+.hljs-identifier {
+  color: #D0D0FF ! important;
+}
+
+.hljs-class .hljs-title,
+.haskell .hljs-type,
+.smalltalk .hljs-class,
+.hljs-javadoctag,
+.hljs-yardoctag,
+.hljs-phpdoc {
+  text-decoration: none ! important;
+}
+
+.hljs-constant {
+  color: #DA4939 ! important;
+}
+
+
+.hljs-symbol,
+.hljs-built_in,
+.ruby .hljs-symbol .hljs-string,
+.ruby .hljs-symbol .hljs-identifier,
+.markdown .hljs-link_url,
+.hljs-attribute {
+  color: #6D9CBE ! important;
+}
+
+.markdown .hljs-link_url {
+  text-decoration: underline ! important;
+}
+
+
+
+.hljs-params,
+.hljs-variable,
+.clojure .hljs-attribute {
+  color: #D0D0FF ! important;
+}
+
+.css .hljs-tag,
+.hljs-rules .hljs-property,
+.hljs-pseudo,
+.tex .hljs-special {
+  color: #CDA869 ! important;
+}
+
+.css .hljs-class {
+  color: #9B703F ! important;
+}
+
+.hljs-rules .hljs-keyword {
+  color: #C5AF75 ! important;
+}
+
+.hljs-rules .hljs-value {
+  color: #CF6A4C ! important;
+}
+
+.css .hljs-id {
+  color: #8B98AB ! important;
+}
+
+.hljs-annotation,
+.apache .hljs-sqbracket,
+.nginx .hljs-built_in {
+  color: #9B859D ! important;
+}
+
+.hljs-preprocessor,
+.hljs-preprocessor *,
+.hljs-pragma {
+  color: #8996A8 !important ! important;
+}
+
+.hljs-hexcolor,
+.css .hljs-value .hljs-number {
+  color: #A5C261 ! important;
+}
+
+.hljs-title,
+.hljs-decorator,
+.css .hljs-function {
+  color: #FFC66D ! important;
+}
+
+.diff .hljs-header,
+.hljs-chunk {
+  background-color: #2F33AB ! important;
+  color: #E6E1DC ! important;
+  display: inline-block ! important;
+  width: 100% ! important;
+}
+
+.diff .hljs-change {
+  background-color: #4A410D ! important;
+  color: #F8F8F8 ! important;
+  display: inline-block ! important;
+  width: 100% ! important;
+}
+
+.hljs-addition {
+  background-color: #144212 ! important;
+  color: #E6E1DC ! important;
+  display: inline-block ! important;
+  width: 100% ! important;
+}
+
+.hljs-deletion {
+  background-color: #600 ! important;
+  color: #E6E1DC ! important;
+  display: inline-block ! important;
+  width: 100% ! important;
+}
+
+.coffeescript .javascript,
+.javascript .xml,
+.tex .hljs-formula,
+.xml .javascript,
+.xml .vbscript,
+.xml .css,
+.xml .hljs-cdata {
+  opacity: 0.7 ! important;
+}

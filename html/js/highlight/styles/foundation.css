@@ -1,0 +1,133 @@
+/*
+Description: Foundation 4 docs style for highlight.js
+Author: Dan Allen <dan.j.allen@gmail.com>
+Website: http://foundation.zurb.com/docs/
+Version: 1.0
+Date: 2013-04-02
+*/
+
+.hljs {
+  display: block ! important; padding: 0.5em ! important;
+  background: #eee ! important;
+}
+
+.hljs-header,
+.hljs-decorator,
+.hljs-annotation {
+  color: #000077 ! important;
+}
+
+.hljs-horizontal_rule,
+.hljs-link_url,
+.hljs-emphasis,
+.hljs-attribute {
+  color: #070 ! important;
+}
+
+.hljs-emphasis {
+  font-style: italic ! important;
+}
+
+.hljs-link_label,
+.hljs-strong,
+.hljs-value,
+.hljs-string,
+.scss .hljs-value .hljs-string {
+  color: #d14 ! important;
+}
+
+.hljs-strong {
+  font-weight: bold ! important;
+}
+
+.hljs-blockquote,
+.hljs-comment {
+  color: #998 ! important;
+  font-style: italic ! important;
+}
+
+.asciidoc .hljs-title,
+.hljs-function .hljs-title {
+  color: #900 ! important;
+}
+
+.hljs-class {
+  color: #458 ! important;
+}
+
+.hljs-id,
+.hljs-pseudo,
+.hljs-constant,
+.hljs-hexcolor {
+  color: teal ! important;
+}
+
+.hljs-variable {
+  color: #336699 ! important;
+}
+
+.hljs-bullet,
+.hljs-javadoc {
+  color: #997700 ! important;
+}
+
+.hljs-pi,
+.hljs-doctype {
+  color: #3344bb ! important;
+}
+
+.hljs-code,
+.hljs-number {
+  color: #099 ! important;
+}
+
+.hljs-important {
+  color: #f00 ! important;
+}
+
+.smartquote,
+.hljs-label {
+  color: #970 ! important;
+}
+
+.hljs-preprocessor,
+.hljs-pragma {
+  color: #579 ! important;
+}
+
+.hljs-reserved,
+.hljs-keyword,
+.scss .hljs-value {
+  color: #000 ! important;
+}
+
+.hljs-regexp {
+  background-color: #fff0ff ! important;
+  color: #880088 ! important;
+}
+
+.hljs-symbol {
+  color: #990073 ! important;
+}
+
+.hljs-symbol .hljs-string {
+  color: #a60 ! important;
+}
+
+.hljs-tag {
+  color: #007700 ! important;
+}
+
+.hljs-at_rule,
+.hljs-at_rule .hljs-keyword {
+  color: #088 ! important;
+}
+
+.hljs-at_rule .hljs-preprocessor {
+  color: #808 ! important;
+}
+
+.scss .hljs-tag,
+.scss .hljs-attribute {
+  color: #339 ! important;
+}

@@ -1,0 +1,122 @@
+/*
+
+Intellij Idea-like styling (c) Vasily Polovnyov <vast@whiteants.net>
+
+*/
+
+.hljs {
+  display: block ! important; padding: 0.5em ! important;
+  color: #000 ! important;
+  background: #fff ! important;
+}
+
+.hljs-subst,
+.hljs-title {
+  font-weight: normal ! important;
+  color: #000 ! important;
+}
+
+.hljs-comment,
+.hljs-template_comment,
+.hljs-javadoc,
+.diff .hljs-header {
+  color: #808080 ! important;
+  font-style: italic ! important;
+}
+
+.hljs-annotation,
+.hljs-decorator,
+.hljs-preprocessor,
+.hljs-pragma,
+.hljs-doctype,
+.hljs-pi,
+.hljs-chunk,
+.hljs-shebang,
+.apache .hljs-cbracket,
+.hljs-prompt,
+.http .hljs-title {
+  color: #808000 ! important;
+}
+
+.hljs-tag,
+.hljs-pi {
+  background: #efefef ! important;
+}
+
+.hljs-tag .hljs-title,
+.hljs-id,
+.hljs-attr_selector,
+.hljs-pseudo,
+.hljs-literal,
+.hljs-keyword,
+.hljs-hexcolor,
+.css .hljs-function,
+.ini .hljs-title,
+.css .hljs-class,
+.hljs-list .hljs-title,
+.clojure .hljs-title,
+.nginx .hljs-title,
+.tex .hljs-command,
+.hljs-request,
+.hljs-status {
+  font-weight: bold ! important;
+  color: #000080 ! important;
+}
+
+.hljs-attribute,
+.hljs-rules .hljs-keyword,
+.hljs-number,
+.hljs-date,
+.hljs-regexp,
+.tex .hljs-special {
+  font-weight: bold ! important;
+  color: #0000ff ! important;
+}
+
+.hljs-number,
+.hljs-regexp {
+  font-weight: normal ! important;
+}
+
+.hljs-string,
+.hljs-value,
+.hljs-filter .hljs-argument,
+.css .hljs-function .hljs-params,
+.apache .hljs-tag {
+  color: #008000 ! important;
+  font-weight: bold ! important;
+}
+
+.hljs-symbol,
+.ruby .hljs-symbol .hljs-string,
+.hljs-char,
+.tex .hljs-formula {
+  color: #000 ! important;
+  background: #d0eded ! important;
+  font-style: italic ! important;
+}
+
+.hljs-phpdoc,
+.hljs-yardoctag,
+.hljs-javadoctag {
+  text-decoration: underline ! important;
+}
+
+.hljs-variable,
+.hljs-envvar,
+.apache .hljs-sqbracket,
+.nginx .hljs-built_in {
+  color: #660e7a ! important;
+}
+
+.hljs-addition {
+  background: #baeeba ! important;
+}
+
+.hljs-deletion {
+  background: #ffc8bd ! important;
+}
+
+.diff .hljs-change {
+  background: #bccff9 ! important;
+}

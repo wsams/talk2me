@@ -1,0 +1,147 @@
+/*
+
+Google Code style (c) Aahan Krish <geekpanth3r@gmail.com>
+
+*/
+
+.hljs {
+  display: block ! important; padding: 0.5em ! important;
+  background: white ! important; color: black ! important;
+}
+
+.hljs-comment,
+.hljs-template_comment,
+.hljs-javadoc,
+.hljs-comment * {
+  color: #800 ! important;
+}
+
+.hljs-keyword,
+.method,
+.hljs-list .hljs-title,
+.clojure .hljs-built_in,
+.nginx .hljs-title,
+.hljs-tag .hljs-title,
+.setting .hljs-value,
+.hljs-winutils,
+.tex .hljs-command,
+.http .hljs-title,
+.hljs-request,
+.hljs-status {
+  color: #008 ! important;
+}
+
+.hljs-envvar,
+.tex .hljs-special {
+  color: #660 ! important;
+}
+
+.hljs-string,
+.hljs-tag .hljs-value,
+.hljs-cdata,
+.hljs-filter .hljs-argument,
+.hljs-attr_selector,
+.apache .hljs-cbracket,
+.hljs-date,
+.hljs-regexp,
+.coffeescript .hljs-attribute {
+  color: #080 ! important;
+}
+
+.hljs-sub .hljs-identifier,
+.hljs-pi,
+.hljs-tag,
+.hljs-tag .hljs-keyword,
+.hljs-decorator,
+.ini .hljs-title,
+.hljs-shebang,
+.hljs-prompt,
+.hljs-hexcolor,
+.hljs-rules .hljs-value,
+.css .hljs-value .hljs-number,
+.hljs-literal,
+.hljs-symbol,
+.ruby .hljs-symbol .hljs-string,
+.hljs-number,
+.css .hljs-function,
+.clojure .hljs-attribute {
+  color: #066 ! important;
+}
+
+.hljs-class .hljs-title,
+.haskell .hljs-type,
+.smalltalk .hljs-class,
+.hljs-javadoctag,
+.hljs-yardoctag,
+.hljs-phpdoc,
+.hljs-typename,
+.hljs-tag .hljs-attribute,
+.hljs-doctype,
+.hljs-class .hljs-id,
+.hljs-built_in,
+.setting,
+.hljs-params,
+.hljs-variable,
+.clojure .hljs-title {
+  color: #606 ! important;
+}
+
+.css .hljs-tag,
+.hljs-rules .hljs-property,
+.hljs-pseudo,
+.hljs-subst {
+  color: #000 ! important;
+}
+
+.css .hljs-class,
+.css .hljs-id {
+  color: #9B703F ! important;
+}
+
+.hljs-value .hljs-important {
+  color: #ff7700 ! important;
+  font-weight: bold ! important;
+}
+
+.hljs-rules .hljs-keyword {
+  color: #C5AF75 ! important;
+}
+
+.hljs-annotation,
+.apache .hljs-sqbracket,
+.nginx .hljs-built_in {
+  color: #9B859D ! important;
+}
+
+.hljs-preprocessor,
+.hljs-preprocessor *,
+.hljs-pragma {
+  color: #444 ! important;
+}
+
+.tex .hljs-formula {
+  background-color: #EEE ! important;
+  font-style: italic ! important;
+}
+
+.diff .hljs-header,
+.hljs-chunk {
+  color: #808080 ! important;
+  font-weight: bold ! important;
+}
+
+.diff .hljs-change {
+  background-color: #BCCFF9 ! important;
+}
+
+.hljs-addition {
+  background-color: #BAEEBA ! important;
+}
+
+.hljs-deletion {
+  background-color: #FFC8BD ! important;
+}
+
+.hljs-comment .hljs-yardoctag {
+  font-weight: bold ! important;
+}

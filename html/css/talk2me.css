@@ -1,0 +1,173 @@
+body {
+    margin-top:32px;
+    margin-bottom:8px;
+}
+
+body, input {
+    font-weight:200;
+}
+
+@media(min-width:42em) {
+    .container {
+        max-width:80%;
+    }
+}
+
+strong {
+    font-weight:400;
+}
+
+.main-control {
+    margin-bottom:8px;
+}
+
+.well {
+    padding:4px;
+    margin-bottom:8px;
+    overflow-x:auto;
+}
+
+.timestamp {
+    color:gray;
+    margin-left:32px;
+    font-size:0.75em;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    text-shadow:0px 0px 4px silver;
+    font-weight:100;
+    margin:0px;
+}
+
+.btn-people, .btn-status, .clear-messages, .send-message {
+    margin-top:8px;
+    margin-bottom:8px;
+    margin-right:8px;
+}
+
+.logout, .btn-help {
+    margin-top:8px;
+    margin-bottom:8px;
+    margin-left:8px;
+}
+
+.btn-people {
+    width:1em;
+    height:1em;
+}
+
+.cursor {
+    cursor:pointer;
+}
+
+.user-status {
+    color:maroon;
+}
+
+dl {
+    margin:0px;
+}
+
+code {
+    white-space:normal;
+    overflow:auto;
+}
+
+dl {
+    margin-top:16px;
+    margin-bottom:16px;
+}
+dd {
+    margin-bottom:16px;
+    margin-left:20px;
+}
+
+.block-hidden {
+    display:none;
+    visibility:hidden;
+}
+.block-visible {
+    display:block;
+    visibility:visible;
+}
+
+.inline-hidden {
+    display:none;
+    visibility:hidden;
+}
+.inline-visible {
+    display:inline;
+    visibility:visible;
+}
+
+#usekey, #key-length, #persistent {
+    margin-bottom:16px;
+}
+
+#usekey, #persistent {
+    margin-right:8px;
+}
+
+#room-users-box {
+    white-space:nowrap;
+    overflow-x:auto;
+}
+
+.room-user {
+    padding:2px 4px;
+    margin:2px;
+    background-color:#f4eec1;
+    border-radius:8px;
+    -webkit-border-radius:8px;
+    -mox-border-radius:8px;
+}
+
+.room-user-message {
+    font-weight:bold;
+}
+
+#message {
+    margin-top:8px;
+}
+
+header {
+    margin-bottom:16px;
+}
+
+.video-container {
+    position:relative;
+    padding-bottom:56.25%;
+    padding-top:30px;
+    height:0;
+    overflow:hidden;
+}
+ 
+.video-container iframe, .video-container object, .video-container embed {
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+}
+
+.more-messages {
+    text-align:center;
+}
+
+#show-more-messages {
+}
+
+.more-messages-alert {
+    color:#404040;
+    margin-bottom:8px;
+    text-shadow:0px 0px 8px #99ce82, 1px 1px 1px silver;
+}
+
+.code {
+    overflow:auto;
+    max-height:480px;
+}
+
+.glyphicon-lock {
+    color:#606060;
+}

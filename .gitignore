@@ -1,0 +1,13 @@
+mysql_data/
+vendor/
+.env
+composer.lock
+config.js
+config.php
+index.php
+CommandPlugin.php
+*.pem
+*.crt
+*.key
+*.swp
+docker-compose.override.yml
