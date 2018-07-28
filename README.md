@@ -219,6 +219,8 @@ This application runs on these two official images from Docker Hub: `mysql:5.7` 
 
 The `messages` table `message` column content will be changed soon and will require a migration, however encrypted content cannot be migrated easily. Persistent chat should be used without the intent of long term storage until this work is complete. The migration won't be difficult but will require a bit of work.
 
+Currently user can only be a member of a single room at any given time. To join multiple rooms simultaneously you must open new browser windows and choose a different username for each session. This may change in the future.
+
 ## Disclaimer
 
 The author of this software is not a security expert and does not provide any warranty or guarantee that this application is as secure as it can be. Use at your own risk. SSL should always be used. Websockets are encrypted by proxying through `hitch` and chat messages are encrypted in the browser using `jscl.js`. See http://bitwiseshiftleft.github.io/sjcl/ for more information.
