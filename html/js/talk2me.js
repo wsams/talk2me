@@ -207,10 +207,10 @@
     }
 
     function growl(message, growlGroup) {
-        console.log(message, growlGroup);
         $.jGrowl(message, { life: 3500, group: growlGroup });
     }
 
+    var typing = {};
     function handleMessage(json) {
         "use strict";
         if (isLoggedIn) {
@@ -218,7 +218,17 @@
             if (jsonObj.a === "message" && jsonObj.t === "typing") {
                 if (showMessage(jsonObj.encrypted, usekey)) {
                     if ($(".from-" + jsonObj.from).size() < 1) {
-                        growl(jsonObj.msg, "from-" + jsonObj.from);
+                        var roomName = $(".room-user[data-username='" + jsonObj.from + "']");
+                        // Move the room name to the front for everyone but the typer indicating they're
+                        // the latest typer. Also append ... to the name for 3.5 seconds. The ... will
+                        // remain there until the user stops typing + 3.5 seconds.
+                        var detachedRoomName = roomName.detach();
+                        $('#users-online').prepend(detachedRoomName);
+                        clearTimeout(typing.foo);
+                        roomName.append('<span class="typing">...</span>');
+                        typing.foo = setTimeout(function() {
+                            roomName.find('.typing').remove();
+                        }, 3500);
                     }
                 }
             } else if (jsonObj.a === "message" && jsonObj.t === "status-message") {
