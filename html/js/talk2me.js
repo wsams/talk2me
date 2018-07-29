@@ -98,21 +98,22 @@
             return;
         }
 
-        msg = "<span class=\"room-user-message\">@" + username + "</span> " + htmlspecialchars(msg)
-                + " <span class=\"timestamp\">" + getTimestamp() + "</span>";
-        // strip_tags(msg, "<strong><em><table><thead><tbody><tr><th><td><img><br><br/><a><p><div><ul><li><ol><span><hr><hr/><dd><dl><dt>");
-        var orgMsg = msg;
+        var timestamp = getTimestamp();
+        var jsonMessageString = JSON.stringify({ "username": username, "msg": msg, "tst": timestamp });
+        // TODO: create a function to generate htmlMessage - this is duplicated 3 times in this code
+        var htmlMessage = "<span class=\"room-user-message\">@" + username + "</span> " + htmlspecialchars(msg)
+            + " <span class=\"timestamp\">" + timestamp + "</span>";
 
         if (usekey) {
-            msg = encryptMessage(msg);
+            jsonMessageString = encryptMessage(jsonMessageString);
         }
 
         if (!msg) {
             $.jGrowl("Message not sent - could not encrypt!", { life: 8000, group: "error-encryption" });
         } else {
-            var request = {"a": "message", "msg": msg, "persistent": persistent, "encrypted": usekey};
+            var request = {"a": "message", "msg": jsonMessageString, "persistent": persistent, "encrypted": usekey};
             conn.send(JSON.stringify(request));
-            appendMessage(orgMsg, usekey);
+            appendMessage(htmlMessage, usekey);
         }
 
         scrollToTop();
@@ -278,14 +279,32 @@
                         $(".messages").before("<div class=\"more-messages-alert container\">"
                                 + "Persistent messages enabled</div>");
                         // Display all messages from room when first logging into room.
+                        console.log(jsonObj.messages);
                         $.each(jsonObj.messages, function(k, v) {
+                            // TODO: start: create function for this (#duplicateParsedMessage)
+                            var jsonMessage = null;
                             if (v.item.encrypted) {
-                                v.item.message = getMessageLockHTML() + " " + decryptMessage(v.item.message);
+                                jsonMessage = JSON.parse(decryptMessage(v.item.message));
+                            } else {
+                                jsonMessage = JSON.parse(v.item.message);
                             }
+
+                            var message = null;
+                            if (v.item.encrypted) {
+                                message = getMessageLockHTML() + " " + htmlspecialchars(jsonMessage.msg);
+                            } else {
+                                message = htmlspecialchars(jsonMessage.msg);
+                            }
+                            var username = jsonMessage.username;
+                            var timestamp = jsonMessage.tst;
+
+                            var htmlMessage = "<span class=\"room-user-message\">@" + username + "</span> "
+                                + message + " <span class=\"timestamp\">" + timestamp + "</span>";
+                            // TODO: end: create function for this (#duplicateParsedMessage)
 
                             if (v.item.message) {
                                 $(".messages").append("<div class=\"well well-sm message\">"
-                                        + Wwiki.render(linker.link(v.item.message)) + "</div>");
+                                        + Wwiki.render(linker.link(htmlMessage)) + "</div>");
                             }
                         });
                         var s = $(jsonObj.messages).size();
@@ -696,12 +715,29 @@
         "use strict";
         if (persistent) {
             $.each(jsonObj.messages, function(k, v) {
+                // TODO: start: create function for this (#duplicateParsedMessage)
+                var jsonMessage = null;
                 if (v.item.encrypted) {
-                    v.item.message = getMessageLockHTML() + " " + decryptMessage(v.item.message);
+                    jsonMessage = JSON.parse(decryptMessage(v.item.message));
+                } else {
+                    jsonMessage = JSON.parse(v.item.message);
                 }
 
+                var message = null;
+                if (v.item.encrypted) {
+                    message = getMessageLockHTML() + " " + htmlspecialchars(jsonMessage.msg);
+                } else {
+                    message = htmlspecialchars(jsonMessage.msg);
+                }
+                var username = jsonMessage.username;
+                var timestamp = jsonMessage.tst;
+
+                var htmlMessage = "<span class=\"room-user-message\">@" + username + "</span> "
+                    + message + " <span class=\"timestamp\">" + timestamp + "</span>";
+                // TODO: end: create function for this (#duplicateParsedMessage)
+
                 $(".messages").append("<div class=\"well well-sm message\">"
-                        + Wwiki.render(linker.link(v.item.message)) + "</div>");
+                        + Wwiki.render(linker.link(htmlMessage)) + "</div>");
             });
             var s = $(jsonObj.messages).size();
             messagesShown += s;

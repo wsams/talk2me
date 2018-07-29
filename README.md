@@ -119,6 +119,8 @@ networks:
 
 Persistent chat rooms are not enabled by default and are never required when entering a room. If you click the checkbox on the login page to **Create or join a persistent room** all of your messages will be logged. If you do not check the box your messages will not be logged. You can tell if a user is logging there messages when an exclamation mark is appended to their username. e.g. `@foobar!`
 
+Note: There is no URL syntax for logging into a room with encrypting messages enabled. If you are logged into a room with encryption enabled and you refresh the browser, your encryption password will be lost. You will need to logout and back in manually with the same encryption password. Your encryption password is only valid until you close the browser window or tab, or refresh.
+
 ## Encrypted messages
 
 Encryption is handled by the Stanford Javascript Crypto Library and happens entirely within your browser.
