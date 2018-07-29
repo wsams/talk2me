@@ -797,6 +797,26 @@
             }
         );
 
+        navigator.serviceWorker.register('service-worker.js').then(function(reg) {
+            // Registration was successful
+            console.log('ServiceWorker registration successful with scope: ', reg.scope);
+            reg.pushManager.getSubscription().then(function(sub) {
+                if (typeof sub === 'undefined') {
+                    console.log('ask for push');
+                    reg.pushManager.subscribe({
+                        userVisibleOnly: true
+                    }).then(function(sub) {
+                        console.log('send sub to server', sub);
+                    });
+                } else {
+                    console.log('we have push subscription');
+                }
+            });
+        }, function(err) {
+            console.log('ServiceWorker registration failed: ', err);
+        });
+
+
         init();
 
         if (!allowPersistentRooms) {

@@ -5,6 +5,7 @@
         }
     },
     "require": {
-        "cboden/Ratchet": "0.3.*"
+        "cboden/Ratchet": "0.3.*",
+        "minishlink/web-push": "4.0.*"
     }
 }
