@@ -237,7 +237,7 @@ class Chat implements MessageComponentInterface {
         }
 
         // This sends the message back for persistence.
-        if ($this->allowPersistentRooms && $json->persistent) {
+        if ($this->allowPersistentRooms && isset($json->persistent) && $json->persistent) {
             $json->a = "persistMessage";
             $json->room = $this->getRoom($from);
             $this->onMessage($from, json_encode($json));
@@ -282,8 +282,7 @@ class Chat implements MessageComponentInterface {
             foreach ($this->clients as $theClient) {
                 $o = array("status"=>"ok", "a"=>"message", "t"=>"status-message",
                         "statusType"=>"disconnect", "username"=>$username,
-                        "msg"=>"@" . $username . " disconnected"
-                        . date("Y-m-d H:i:s") . "</span>");
+                        "msg"=>"@" . $username . " left");
                 if ($this->getRoom($theClient) === $room
                         // This makes sure a non-encrypted person doesn't see an encrypted person
                         // exit the room.
@@ -353,7 +352,7 @@ class Chat implements MessageComponentInterface {
     }
 
     public function getRoom($client) {
-        return $this->rooms[$client->resourceId]['room'];
+        return isset($this->rooms[$client->resourceId]['room']) ? $this->rooms[$client->resourceId]['room'] : null;
     }
 
     public function setRoom($client, $room) {
@@ -361,7 +360,7 @@ class Chat implements MessageComponentInterface {
     }
 
     public function getUsername($client) {
-        return $this->rooms[$client->resourceId]['username'];
+        return isset($this->rooms[$client->resourceId]['username']) ? $this->rooms[$client->resourceId]['username'] : null;
     }
 
     public function setUsername($client, $username) {
@@ -370,7 +369,8 @@ class Chat implements MessageComponentInterface {
 
     public function unsetRoomUserClient($client) {
         $key = false;
-        if (is_array($this->roomUsers[$this->getRoom($client)])) {
+        if (isset($this->roomUsers[$this->getRoom($client)])
+                && is_array($this->roomUsers[$this->getRoom($client)])) {
             $key = array_search($this->getUsername($client),
                     $this->roomUsers[$this->getRoom($client)]);
         }

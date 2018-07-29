@@ -207,12 +207,11 @@
     }
 
     function growl(message, growlGroup) {
-        //$.jGrowl(message, { life: 3500, group: growlGroup });
         if (Notification.permission === 'granted') {
             // could include icon and body
+            // data: { primaryKey: growlGroup }
             var options = {
-                vibrate: [100, 50, 100],
-                data: { primaryKey: growlGroup }
+                vibrate: [100, 50, 100]
             };
             navigator.serviceWorker.getRegistration('/app').then(function(reg) {
                 new Notification(message, options);
@@ -256,7 +255,8 @@
                         updateRoomMember(jsonObj.username, jsonObj['currentStatus'], jsonObj.encrypted);
                     }
 
-                    growl(jsonObj.msg, "from-status-" + jsonObj.from);
+                    // Don't growl by default for status messages like "@user left", "@user joined", ...
+                    //growl(jsonObj.msg, "from-status-" + jsonObj.from);
                 }
             } else if (jsonObj.a === "message" && jsonObj.t === "who") {
                 updateRoomMembers(jsonObj.users);
@@ -268,16 +268,13 @@
                     }
 
                     if (showMessage(jsonObj.encrypted, usekey)) {
-                        // Remove Growls on message received.
-                        if ($(".from-" + jsonObj.from).size() > 0) {
-                            lastTyping = parseInt(new Date().getTime()) - threshold;
-                            $(".from-" + jsonObj.from).remove();
-                        }
-
+                        // @deprecated - remove this commented code once Notification is solid
                         // Only play sounds for these types of messages.
-                        var notif = new Audio("sounds/" + notifMessage);
-                        notif.volume = soundVolume;
-                        notif.play();
+                        // Commented now that Notification is being used - makes
+                        // a noise and vibration on mobile devices automatically.
+                        //var notif = new Audio("sounds/" + notifMessage);
+                        //notif.volume = soundVolume;
+                        //notif.play();
 
                         // Append message to page
                         appendParsedMessage(jsonObj.msg, jsonObj.encrypted);
@@ -429,6 +426,7 @@
             + message + " <span class=\"timestamp\">" + timestamp + "</span>";
         // TODO: end: create function for this (#duplicateParsedMessage)
         $(".messages").prepend("<div class=\"well well-sm message\">" + Wwiki.render(linker.link(htmlMessage)) + "</div>");
+        growl('@' + username + ': ' + jsonMessage.msg, "from-message-" + username);
     }
 
     function login() {
