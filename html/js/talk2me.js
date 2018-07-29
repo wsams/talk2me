@@ -207,7 +207,19 @@
     }
 
     function growl(message, growlGroup) {
-        $.jGrowl(message, { life: 3500, group: growlGroup });
+        //$.jGrowl(message, { life: 3500, group: growlGroup });
+        if (Notification.permission === 'granted') {
+            // could include icon and body
+            var options = {
+                vibrate: [100, 50, 100],
+                data: { primaryKey: growlGroup }
+            };
+            navigator.serviceWorker.getRegistration('/app').then(function(reg) {
+                new Notification(message, options);
+            });
+        } else if (Notification.permission !== 'denied') {
+            // could request permission to show notifications here again
+        }
     }
 
     var typing = {};
@@ -224,9 +236,11 @@
                         // remain there until the user stops typing + 3.5 seconds.
                         var detachedRoomName = roomName.detach();
                         $('#users-online').prepend(detachedRoomName);
-                        clearTimeout(typing.foo);
-                        roomName.append('<span class="typing">...</span>');
-                        typing.foo = setTimeout(function() {
+                        clearTimeout(typing[jsonObj.from]);
+                        if (roomName.find('.typing').size() === 0) {
+                            roomName.append('<span class="typing">...</span>');
+                        }
+                        typing[jsonObj.from] = setTimeout(function() {
                             roomName.find('.typing').remove();
                         }, 3500);
                     }
@@ -294,7 +308,6 @@
                         $(".messages").before("<div class=\"more-messages-alert container\">"
                                 + "Persistent messages enabled</div>");
                         // Display all messages from room when first logging into room.
-                        console.log(jsonObj.messages);
                         $.each(jsonObj.messages, function(k, v) {
                             // TODO: start: create function for this (#duplicateParsedMessage)
                             var jsonMessage = null;

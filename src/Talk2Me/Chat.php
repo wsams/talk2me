@@ -100,8 +100,7 @@ class Chat implements MessageComponentInterface {
 
             $username = $this->getUsername($from);
             $this->setUserStatus($from, $json->status);
-            $json->msg = "@" . $username . " went " . $json->status
-                    . " <span class=\"timestamp\">" . date("Y-m-d H:i:s") . "</span>";
+            $json->msg = "@" . $username . " went " . $json->status;
             $json->statusType = "statusChange";
             $json->username = $username;
             $json->currentStatus = $json->status;
@@ -198,9 +197,7 @@ class Chat implements MessageComponentInterface {
                         && !(!$this->getUserEncrypted($client->resourceId) && $this->getUserEncrypted($from->resourceId))) {
                     $o = array("status"=>"ok", "a"=>"message", "t"=>"status-message",
                             "statusType"=>"join", "username"=>$json->username,
-                            "msg"=>"<span style=\"color:green;\">@"
-                            . $json->username . " joined</span> <span class=\"timestamp\">"
-                            . date("Y-m-d H:i:s") . "</span>", "encrypted" => $json->encrypted);
+                            "msg"=>"@" . $json->username . " joined", "encrypted" => $json->encrypted);
                     $client->send(json_encode($o));
                 }
             }
@@ -271,8 +268,7 @@ class Chat implements MessageComponentInterface {
             }
         }
         $currentMembers = rtrim($currentMembers, ", ");
-        $msg = "<strong style=\"color:green;\">Online</strong> {$currentMembers} <span class=\"timestamp\">"
-                . date("Y-m-d H:i:s") . "</span>";
+        $msg = "Online: {$currentMembers}";
 
         $currentMembersObj = array("status"=>"ok", "a"=>"message", "t"=>"who", "msg"=>$msg, "users"=>$users);
         $from->send(json_encode($currentMembersObj));
@@ -286,8 +282,7 @@ class Chat implements MessageComponentInterface {
             foreach ($this->clients as $theClient) {
                 $o = array("status"=>"ok", "a"=>"message", "t"=>"status-message",
                         "statusType"=>"disconnect", "username"=>$username,
-                        "msg"=>"<span style=\"color:red;\">@"
-                        . $username . " disconnected</span> <span class=\"timestamp\">"
+                        "msg"=>"@" . $username . " disconnected"
                         . date("Y-m-d H:i:s") . "</span>");
                 if ($this->getRoom($theClient) === $room
                         // This makes sure a non-encrypted person doesn't see an encrypted person
