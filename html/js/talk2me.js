@@ -109,7 +109,7 @@
         }
 
         if (!msg) {
-            $.jGrowl("Message not sent - could not encrypt!", { life: 8000, group: "error-encryption" });
+            growl("Message not sent - could not encrypt!", "error-encryption");
         } else {
             var request = {"a": "message", "msg": jsonMessageString, "persistent": persistent, "encrypted": usekey};
             conn.send(JSON.stringify(request));
@@ -206,6 +206,11 @@
         }
     }
 
+    function growl(message, growlGroup) {
+        console.log(message, growlGroup);
+        $.jGrowl(message, { life: 3500, group: growlGroup });
+    }
+
     function handleMessage(json) {
         "use strict";
         if (isLoggedIn) {
@@ -213,7 +218,7 @@
             if (jsonObj.a === "message" && jsonObj.t === "typing") {
                 if (showMessage(jsonObj.encrypted, usekey)) {
                     if ($(".from-" + jsonObj.from).size() < 1) {
-                        $.jGrowl(jsonObj.msg, { life: 3500, group: "from-" + jsonObj.from });
+                        growl(jsonObj.msg, "from-" + jsonObj.from);
                     }
                 }
             } else if (jsonObj.a === "message" && jsonObj.t === "status-message") {
@@ -227,7 +232,7 @@
                         updateRoomMember(jsonObj.username, jsonObj['currentStatus'], jsonObj.encrypted);
                     }
 
-                    $.jGrowl(jsonObj.msg, { life: 1500, group: "from-status-" + jsonObj.from });
+                    growl(jsonObj.msg, "from-status-" + jsonObj.from);
                 }
             } else if (jsonObj.a === "message" && jsonObj.t === "who") {
                 updateRoomMembers(jsonObj.users);
@@ -251,7 +256,7 @@
                         notif.play();
 
                         // Append message to page
-                        appendMessage(jsonObj.msg, jsonObj.encrypted);
+                        appendParsedMessage(jsonObj.msg, jsonObj.encrypted);
 
                         // Increment favicon
                         if (!windowFocused && jsonObj.t === "message") {
@@ -376,6 +381,31 @@
             msg = getMessageLockHTML() + " " + msg;
         }
         $(".messages").prepend("<div class=\"well well-sm message\">" + Wwiki.render(linker.link(msg)) + "</div>");
+    }
+
+    function appendParsedMessage(msg, encrypted) {
+        "use strict";
+        // TODO: start: create function for this (#duplicateParsedMessage)
+        var jsonMessage = null;
+        if (encrypted) {
+            jsonMessage = JSON.parse(decryptMessage(msg));
+        } else {
+            jsonMessage = JSON.parse(msg);
+        }
+
+        var message = null;
+        if (encrypted) {
+            message = getMessageLockHTML() + " " + htmlspecialchars(jsonMessage.msg);
+        } else {
+            message = htmlspecialchars(jsonMessage.msg);
+        }
+        var username = jsonMessage.username;
+        var timestamp = jsonMessage.tst;
+
+        var htmlMessage = "<span class=\"room-user-message\">@" + username + "</span> "
+            + message + " <span class=\"timestamp\">" + timestamp + "</span>";
+        // TODO: end: create function for this (#duplicateParsedMessage)
+        $(".messages").prepend("<div class=\"well well-sm message\">" + Wwiki.render(linker.link(htmlMessage)) + "</div>");
     }
 
     function login() {
@@ -668,23 +698,6 @@
         }
     }
 
-    /**
-    * http://updates.html5rocks.com/2012/06/How-to-convert-ArrayBuffer-to-and-from-String
-    */
-    function ab2str(buf) {
-        "use strict";
-        return String.fromCharCode.apply(null, new Uint16Array(buf));
-    }
-
-    function makeIV() {
-        var text = "";
-        var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-        for (var i = 0; i < 16; i++) {
-            text += chars.charAt(Math.floor(Math.random() * chars.length));
-        }
-        return text;
-    }
-
     function encryptMessage(msg) {
         "use strict";
         try {
@@ -756,6 +769,12 @@
     }
 
     $(document).ready(function() {
+
+        Notification.requestPermission(
+            function(status) {
+                console.log('Permission status: ' + status);
+            }
+        );
 
         init();
 
