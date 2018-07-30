@@ -7,6 +7,9 @@ if (file_exists(__DIR__ . "/CommandPlugin.php")) {
     require_once(__DIR__ . "/CommandPlugin.php");
 }
 
+/**
+ * Push notifications handled by https://github.com/web-push-libs/web-push-php
+ */
 class Chat implements MessageComponentInterface {
 
     protected $clients;

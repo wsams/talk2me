@@ -6,6 +6,9 @@
     },
     "require": {
         "cboden/Ratchet": "0.3.*",
-        "minishlink/web-push": "4.0.*"
+        "minishlink/web-push": "4.0.*",
+        "web-token/jwt-signature": "^1.0",
+        "web-token/jwt-core": "^1.1",
+        "ext-gmp": "*"
     }
 }
