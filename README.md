@@ -12,7 +12,7 @@ This chat application is designed for for use within a web browser and is focuse
 * Slash commands similar to IRC. Implement `CommandPlugin` for custom slash commands. e.g. /help
 * User is typing notification.
 * Growl messages for events such as: status changes, sign on, sign off, user is typing, ...
-* Messages formatting with markdown syntax.
+* Messages formatted with markdown syntax using the [showdown](https://github.com/showdownjs/showdown) library. Here's a populate [markdown cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet).
 
 ## INSTALL
 
@@ -158,52 +158,6 @@ To enter a persistent room, if enabled, append an exclamation mark.
 e.g. https://www.example.com/talk2me/#room@username!
 
 *Note, a username may only be a member of one room at any time.*
-
-### Message Filtering (Wiki like syntax)
-
-Embed YouTube videos.
-
-    {youtube}https://www.youtube.com/watch?v=mgMn68Rgva0{/youtube}
-
-Insert image.
-
-    {http://www.example.com/image.jpg}
-
-Insert hyper link with custom text.
-
-    [http://www.example.com | This is a link]
-
-Insert a hyper link.
-
-    [http://www.example.com]
-
-Bold text.
-
-    '''make me bold'''
-
-Italic text.
-
-    ''make me italic''
-
-Strikethrough text.
-
-    {-strike me-}
-
-Monospace code font.
-
-    @@This will be monospace@@
-
-Create a line break. i.e. &lt;br /&gt;
-
-    {br}
-
-Code blocks.
-
-    {code}
-    function foo() {
-        console.log('hello world');
-    }
-    {/code}
 
 ## Command Plugin
 

@@ -23,6 +23,7 @@
         twitter: false,
         urls: true
     });
+    var converter = new showdown.Converter();
 
     function random(min, max) {
         "use strict";
@@ -343,7 +344,7 @@
 
                             if (v.item.message) {
                                 $(".messages").append("<div class=\"well well-sm message\">"
-                                        + Wwiki.render(linker.link(htmlMessage)) + "</div>");
+                                        + linker.link(converter.makeHtml(htmlMessage)) + "</div>");
                             }
                         });
                         var s = $(jsonObj.messages).size();
@@ -414,7 +415,7 @@
         if (encrypted) {
             msg = getMessageLockHTML() + " " + msg;
         }
-        $(".messages").prepend("<div class=\"well well-sm message\">" + Wwiki.render(linker.link(msg)) + "</div>");
+        $(".messages").prepend("<div class=\"well well-sm message\">" + linker.link(converter.makeHtml(msg)) + "</div>");
     }
 
     function appendParsedMessage(msg, encrypted) {
@@ -444,7 +445,7 @@
         var htmlMessage = "<span class=\"room-user-message\">@" + username + "</span> "
             + message + " <span class=\"timestamp\">" + timestamp + "</span>";
         // TODO: end: create function for this (#duplicateParsedMessage)
-        $(".messages").prepend("<div class=\"well well-sm message\">" + Wwiki.render(linker.link(htmlMessage)) + "</div>");
+        $(".messages").prepend("<div class=\"well well-sm message\">" + linker.link(converter.makeHtml(htmlMessage)) + "</div>");
         growl('@' + username + ': ' + jsonMessage.msg, "from-message-" + username);
     }
 
@@ -795,7 +796,7 @@
                 // TODO: end: create function for this (#duplicateParsedMessage)
 
                 $(".messages").append("<div class=\"well well-sm message\">"
-                        + Wwiki.render(linker.link(htmlMessage)) + "</div>");
+                        + linker.link(converter.makeHtml(htmlMessage)) + "</div>");
             });
             var s = $(jsonObj.messages).size();
             messagesShown += s;
