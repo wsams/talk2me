@@ -26,6 +26,24 @@ composer install
 composer update
 ```
 
+If you don't have composer installed you can easily use a docker container containing composer to install the dependencies.
+
+There's a sample `Dockerfile` in the `docker/composer` directory.
+
+Go into that directory and run the following command:
+
+```
+docker build -t talk2me-composer --rm=true .
+```
+
+Now change back to the root of your talk2me clone and run this command:
+
+```
+docker run -it --rm -v (pwd):(pwd) -w (pwd) -u (id -u) talk2me-composer update
+```
+
+This will mount the current directory inside the container and will run `composer update` on it effectively doing the same thing as a local installation of `composer`.
+
 ### SSL certificate
 
 Create a `cert.pem` file in the root directory, or re-configure `docker-compose.yml`. You can create your certificates for free using Lets Encrypt. For example use `certbot` to create the certificates. Make sure you include the cert and private key in `cert.pem`. For example: `cat cert.key cert.crt > cert.pem`

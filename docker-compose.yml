@@ -1,4 +1,4 @@
-version: "2"
+version: "3.5"
 services:
   www:
     image: talk2me
@@ -13,7 +13,7 @@ services:
       - MYSQL_DATABASE
     volumes:
       - ./sql:/docker-entrypoint-initdb.d
-      - ./mysql_data:/var/lib/mysql
+      - chat_mysql_data:/var/lib/mysql
   chat:
     image: talk2mechat
     ports:
@@ -25,3 +25,5 @@ services:
       - ./startup.sh:/talk2me/startup.sh
       - ./hitch.conf:/talk2me/hitch.conf
       - ./vendor:/talk2me/vendor
+volumes:
+  chat_mysql_data:

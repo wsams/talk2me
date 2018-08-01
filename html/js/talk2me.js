@@ -54,6 +54,10 @@
     }
 
     function htmlspecialchars(text) {
+        if (!text) {
+            return '';
+        }
+
         var map = {
             '&': '&amp;',
             '<': '&lt;',
@@ -267,6 +271,11 @@
                         jsonObj.msg = decryptMessage(jsonObj.msg);
                     }
 
+                    // Skip this message because it can't be decrypted.
+                    if (!jsonObj.msg) {
+                        return;
+                    }
+
                     if (showMessage(jsonObj.encrypted, usekey)) {
                         // @deprecated - remove this commented code once Notification is solid
                         // Only play sounds for these types of messages.
@@ -312,6 +321,11 @@
                                 jsonMessage = JSON.parse(decryptMessage(v.item.message));
                             } else {
                                 jsonMessage = JSON.parse(v.item.message);
+                            }
+
+                            // Skip this message because it can't be decrypted.
+                            if (!jsonMessage) {
+                                return;
                             }
 
                             var message = null;
@@ -411,6 +425,11 @@
             jsonMessage = JSON.parse(decryptMessage(msg));
         } else {
             jsonMessage = JSON.parse(msg);
+        }
+
+        // Skip this message because it can't be decrypted.
+        if (!jsonMessage) {
+            return;
         }
 
         var message = null;
@@ -755,6 +774,11 @@
                     jsonMessage = JSON.parse(decryptMessage(v.item.message));
                 } else {
                     jsonMessage = JSON.parse(v.item.message);
+                }
+
+                // Skip message because it can't be decrypted.
+                if (!jsonMessage) {
+                    return;
                 }
 
                 var message = null;
