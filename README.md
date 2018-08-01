@@ -5,6 +5,7 @@ This chat application is designed for for use within a web browser and is focuse
 ## Features
 
 * Secure WebSockets over hitch for secure instant chat.
+* No integrations with any external services. Entirely self hosted.
 * Rooms with multiple users.
     * Persistent chat room messages stored in MySQL if enabled.
 * Client-side[1] encryption with [http://bitwiseshiftleft.github.io/sjcl/](Stanford Javascript Crypto Library).
