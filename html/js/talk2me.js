@@ -118,7 +118,9 @@
         } else {
             var request = {"a": "message", "msg": jsonMessageString, "persistent": persistent, "encrypted": usekey};
             conn.send(JSON.stringify(request));
-            appendMessage(htmlMessage, usekey);
+            // When owner is true we allow deleting and editing a message.
+            var owner = true;
+            appendMessage(htmlMessage, usekey, owner);
         }
 
         scrollToTop();
@@ -410,12 +412,19 @@
         return "<span class=\"glyphicon glyphicon-lock btn-tooltip\" title=\"This users messages are encrypted.\"></span>";
     }
 
-    function appendMessage(msg, encrypted) {
+    function appendMessage(msg, encrypted, owner) {
         "use strict";
         if (encrypted) {
             msg = getMessageLockHTML() + " " + msg;
         }
-        $(".messages").prepend("<div class=\"well well-sm message\">" + linker.link(converter.makeHtml(msg)) + "</div>");
+        var link = '';
+        if (typeof owner !== 'undefined' && owner !== null && owner && false) {
+            // TODO: Before enabling this we need to track the current browser session in a secure anonymous way.
+            //       Once the ratchet server detects the client has left, the session in the database must be removed.
+            link = '<span class="glyphicon glyphicon-trash" title="Delete this message"></span> '
+                + '<span class="glyphicon glyphicon-pencil" title="Edit this message"></span>';
+        }
+        $(".messages").prepend('<div class="well well-sm message">' + link + ' ' + linker.link(converter.makeHtml(msg)) + "</div>");
     }
 
     function appendParsedMessage(msg, encrypted) {
