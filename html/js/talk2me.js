@@ -357,7 +357,7 @@
                     }
                     $("#message").focus();
                     $("#message").keypress(function (e) {
-                        if (e.which == 13) {
+                        if (e.which === 13 && !e.shiftKey) {
                             e.preventDefault();
                             sendMessageAction();
                             return false;
