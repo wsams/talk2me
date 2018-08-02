@@ -533,8 +533,7 @@
         secret = "";
         var request = {"a": "logout", "encrypted": usekey};
         conn.send(JSON.stringify(request));
-        window.location.href = window.location.protocol + "//"
-                + window.location.hostname + window.location.pathname;
+        window.location.href = window.location.pathname;
     }
 
     function applyChangeStatusEvent() {
@@ -824,7 +823,6 @@
     }
 
     $(document).ready(function() {
-
         Notification.requestPermission(
             function(status) {
                 console.log('Permission status: ' + status);
