@@ -12,7 +12,7 @@ This chat application is designed for for use within a web browser and is focuse
 * Current status. e.g. Free, Away, Busy, Idle, ...
 * Slash commands similar to IRC. Implement `CommandPlugin` for custom slash commands. e.g. /help
 * User is typing notification.
-* Growl messages for events such as: status changes, sign on, sign off, user is typing, ...
+* Browser notification API.
 * Messages formatted with markdown syntax using the [showdown](https://github.com/showdownjs/showdown) library. Here's a populate [markdown cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet).
 
 ## INSTALL
